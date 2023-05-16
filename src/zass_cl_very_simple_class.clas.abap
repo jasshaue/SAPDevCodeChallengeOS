@@ -1,23 +1,36 @@
-class ZASS_CL_VERY_SIMPLE_CLASS definition
-  public
-  final
-  create public .
+CLASS zass_cl_very_simple_class DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  class-methods DO_STH .
-protected section.
-private section.
+    DATA: output TYPE REF TO if_oo_adt_classrun_out.
+
+    INTERFACES if_oo_adt_classrun .
+
+
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+    METHODS do_sth .
 ENDCLASS.
 
 
 
-CLASS ZASS_CL_VERY_SIMPLE_CLASS IMPLEMENTATION.
+CLASS zass_cl_very_simple_class IMPLEMENTATION.
 
 
-  method DO_STH.
+  METHOD do_sth.
 
-    Write: / | Say "Hello World" |.
+    output->write( 'Say "Hello World" ' ).
 
-  endmethod.
+  ENDMETHOD.
+
+
+  METHOD if_oo_adt_classrun~main.
+    out->write( 'Main started' ).
+    output = out.
+    do_sth( ).
+    out->write(  'Main ended' ).
+  ENDMETHOD.
 ENDCLASS.
